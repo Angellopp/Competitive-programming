@@ -22,7 +22,7 @@ int main() {
                     v[j] = val;
                     val++;
                 }
-            } 
+            }
             else {
                 val = val + ((n-i) / k);
                 aux = val+1;
