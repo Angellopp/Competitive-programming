@@ -32,26 +32,30 @@ int main(){
     int tt;
     cin >> tt;
     while (tt--) {
-        int n, ans = 0; 
-        cin >> n;
-        vector<int> v(n+1);
-        rep(1, n+1) cin >> v[i];
-        rep(1, n+1) {
-            if (n % i == 0) {
-                int ggg = 0;
-                for (int j = 1; j <= i; j++) {
-                    int gg = 0;
-                    for (int k = j+i; k <= n; k+=i) {
-                        gg = __gcd(abs(v[k] - v[k-i]), gg);
-                    }
-                    ggg = __gcd(ggg, gg);
+        int n, k;
+        cin >> n >> k;
+        set <int> s;
+        int a = n - k, b = n + k - 2;
+        if (a % 2 == 0) {
+            a /= 2;
+            for (int i = 1; i * i <= a; i++) {
+                if (a % i == 0) {
+                    if (i + 1 >= k) s.insert(i);
+                    if (i * i != a and a / i+1 >= k) s.insert(a / i);
                 }
-                if (ggg != 1) 
-                // cout << i << ' ' << ggg << '\n';
-                ans ++;
             }
         }
-        cout << ans << '\n';
+        if (b % 2 == 0 and b) {
+            b /= 2;
+            for (int i = 1; i * i <= b; i++) {
+                if (b % i == 0) {
+                    if (i + 1>= k) s.insert(i);
+                    if (i * i != b and b / i+1 >= k) s.insert(b / i);
+                }
+            }
+        }
+        cout << s.size() << '\n';
+
     }
     return 0;
 }

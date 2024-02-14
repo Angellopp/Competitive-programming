@@ -32,26 +32,22 @@ int main(){
     int tt;
     cin >> tt;
     while (tt--) {
-        int n, ans = 0; 
+        int n, aux;
         cin >> n;
-        vector<int> v(n+1);
-        rep(1, n+1) cin >> v[i];
-        rep(1, n+1) {
-            if (n % i == 0) {
-                int ggg = 0;
-                for (int j = 1; j <= i; j++) {
-                    int gg = 0;
-                    for (int k = j+i; k <= n; k+=i) {
-                        gg = __gcd(abs(v[k] - v[k-i]), gg);
-                    }
-                    ggg = __gcd(ggg, gg);
-                }
-                if (ggg != 1) 
-                // cout << i << ' ' << ggg << '\n';
-                ans ++;
-            }
+        set <int> s;
+        for (int i = 0; i < n; i++) {
+            cin >> aux; s.insert(aux);
         }
-        cout << ans << '\n';
+        vector <int> v;
+        int ans = 1;
+        for (auto x : s) v.push_back(x);
+        for (int i = 0; i < v.size(); i++) {
+            int a = upper_bound(v.begin(), v.end(), v[i] + n-1) - v.begin();
+            if(a) a--;
+            a-= i;
+            ans = max(a+1,ans);
+        }
+        cout << ans << "\n";
     }
     return 0;
 }

@@ -32,26 +32,31 @@ int main(){
     int tt;
     cin >> tt;
     while (tt--) {
-        int n, ans = 0; 
-        cin >> n;
-        vector<int> v(n+1);
-        rep(1, n+1) cin >> v[i];
-        rep(1, n+1) {
-            if (n % i == 0) {
-                int ggg = 0;
-                for (int j = 1; j <= i; j++) {
-                    int gg = 0;
-                    for (int k = j+i; k <= n; k+=i) {
-                        gg = __gcd(abs(v[k] - v[k-i]), gg);
-                    }
-                    ggg = __gcd(ggg, gg);
-                }
-                if (ggg != 1) 
-                // cout << i << ' ' << ggg << '\n';
-                ans ++;
+        int n, m;
+        cin >> n >> m;
+        if(n % 2 == 0 and m%2 == 0) {
+            cout << "Yes\n";
+        }
+        else if (n % 2 == 0 and m%2 == 1){
+            if (n / 2 == m) {
+                cout << "No\n";
+            }
+            else {
+                cout << "Yes\n";
             }
         }
-        cout << ans << '\n';
+        else if (n % 2 == 1 and m%2 == 0){
+            if (m / 2 == n) {
+                cout << "No\n";
+            }
+            else {
+                cout << "Yes\n";
+            }
+        }
+        else {
+            cout << "No\n";
+        }
+        
     }
     return 0;
 }

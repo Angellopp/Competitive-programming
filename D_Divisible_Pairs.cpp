@@ -13,6 +13,7 @@ using u32 = uint32_t;
 using u64 = uint64_t;
 using namespace std;
 
+// typedef long  ll;
 typedef long long ll;
 typedef pair<int, int> pii;
 typedef pair<ll,ll> pll;
@@ -25,33 +26,43 @@ typedef priority_queue<int, vi, greater<int>> pq_min;
 
 const int maxn = 2e5;
 const u32 MOD = 1000000007;
-
-vector <int> prim;
+// #define int long long int
 int main(){ 
     fast_io;
     int tt;
     cin >> tt;
     while (tt--) {
-        int n, ans = 0; 
-        cin >> n;
-        vector<int> v(n+1);
-        rep(1, n+1) cin >> v[i];
-        rep(1, n+1) {
-            if (n % i == 0) {
-                int ggg = 0;
-                for (int j = 1; j <= i; j++) {
-                    int gg = 0;
-                    for (int k = j+i; k <= n; k+=i) {
-                        gg = __gcd(abs(v[k] - v[k-i]), gg);
-                    }
-                    ggg = __gcd(ggg, gg);
-                }
-                if (ggg != 1) 
-                // cout << i << ' ' << ggg << '\n';
-                ans ++;
-            }
+        int n, x, y;
+        cin >> n >> x >> y;
+        vector <int> v(n);
+        for (int i = 0; i < n; i++) {
+            cin >> v[i];
         }
-        cout << ans << '\n';
+        map <ll, vector <ll>> m;
+        for (int i = 0; i < n; i++) {
+            m[v[i] % y].pb(v[i] % x);
+        }
+        ll ans = 0;
+        for (auto xx : m) {
+            map <ll, ll> mm;
+            for (auto yy : xx.S) {
+                mm[yy]++;
+            }
+            ll aux = 0;
+            for (auto yy : mm) {
+                if(2*yy.F == x or 2*yy.F == 0) {
+                    ans += yy.S * (yy.S - 1) / 2;
+                }
+                else aux += yy.S * (mm[x - yy.F]);
+                // cout << "ans" <<ans << "\n";
+            }
+            ans += aux / 2;
+        }
+        cout << ans << "\n";
+        
+
+
+        
     }
     return 0;
 }
